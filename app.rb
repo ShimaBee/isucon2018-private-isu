@@ -100,7 +100,7 @@ module Isuconp
       def make_posts(results, all_comments: false)
         posts = []
         results.to_a.each do |post|
-          post[:comment_count] = db.prepare('SELECT COUNT(*) AS `count` FROM `comments` WHERE `post_id` = ?').execute(
+          post[:comment_count] = db.prepare('SELECT COUNT(*) AS `count` FROM `comments` WHERE `post_id` = ? limit 5').execute(
             post[:id]
           ).first[:count]
 
@@ -234,7 +234,7 @@ module Isuconp
     get '/' do
       me = get_session_user()
 
-      results = db.query('SELECT `id`, `user_id`, `body`, `created_at`, `mime` FROM `posts` ORDER BY `created_at` DESC')
+      results = db.query('SELECT `id`, `user_id`, `body`, `created_at`, `mime` FROM `posts` ORDER BY `created_at` DESC limit 5')
       posts = make_posts(results)
 
       erb :index, layout: :layout, locals: { posts: posts, me: me }
