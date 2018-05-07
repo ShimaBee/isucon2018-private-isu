@@ -169,6 +169,8 @@ module Isuconp
       end
     end
 
+    
+    
     get '/register' do
       if get_session_user()
         redirect '/', 302
@@ -181,6 +183,15 @@ module Isuconp
         redirect '/', 302
       end
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
       account_name = params['account_name']
       password = params['password']
 
