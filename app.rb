@@ -1,7 +1,3 @@
-require 'sinatra/base'
-require 'mysql2'
-require 'rack-flash'
-require 'shellwords'
 
 module Isuconp
   class App < Sinatra::Base
@@ -104,7 +100,7 @@ module Isuconp
             post[:id]
           ).first[:count]
 
-          query = 'SELECT * FROM `comments` WHERE `post_id` = ? ORDER BY `created_at` DESC'
+          query = 'SELECT * FROM `comments` WHERE `post_id` = ? ORDER BY `created_at` DESC limit 5'
           unless all_comments
             query += ' LIMIT 3'
           end
