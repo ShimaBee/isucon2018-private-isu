@@ -175,7 +175,18 @@ module Isuconp
 
     
     
-    
+    get '/register' do
+      if get_session_user()
+        redirect '/', 302
+      end
+      erb :register, layout: :layout, locals: { me: nil }
+    end
+
+    post '/register' do
+      if get_session_user()
+        redirect '/', 302
+      end
+
     
     
     
